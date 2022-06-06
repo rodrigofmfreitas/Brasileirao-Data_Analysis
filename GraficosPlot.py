@@ -12,10 +12,15 @@ def TimesPlot(ano_time_plot, time):
 
     def plot_time(time_df, time):
         fig, axes = plt.subplots(figsize = (15, 10))
-        sns.lineplot(x = "ano", y = "ponto_mandante", color = "green", data = time_df)
-        sns.lineplot(x = "ano", y = "ponto_visitante", color = "red", data = time_df)
-        axes.set(xlabel = "Ano", ylabel = "Pontos", title = f"Pontos Ganhos como Mandante dos principais times da Serie A do Brasileirão nos Últimos 10 Anos ({time})")
-        plt.xticks(np.arange(min(time_df["ano"]), max(time_df["ano"])+1, 1.0))
+        sns.pointplot(x = "ano", y = "ponto_mandante", 
+                    color = "green", 
+                    data = time_df, 
+                    )
+        sns.pointplot(x = "ano", y = "ponto_visitante", 
+                    color = "red", 
+                    data = time_df,
+                    )
+        axes.set(xlabel = "Ano", ylabel = "Pontos", title = f"Pontos Ganhos dos principais times da Serie A do Brasileirão nos Últimos 10 Anos ({time})")
         plt.yticks(np.arange(0, max(time_df["ponto_mandante"])+5, 5.0))
         plt.grid()
         plt.show()
@@ -26,8 +31,9 @@ def TimesPlot(ano_time_plot, time):
     for i in range (2012, 2021):
         if i not in lista_anos:
             ano.append(i)
-            ponto_mandante.append(0)
-            ponto_visitante.append(0)
+            ponto_mandante.append(np.nan)
+            ponto_visitante.append(np.nan)
+
     if len(ano) > 0:
         anos_faltantes = {"Time": time, "ano": ano, "ponto_mandante": ponto_mandante, "ponto_visitante": ponto_visitante}
         df_fix = pd.DataFrame(anos_faltantes)
