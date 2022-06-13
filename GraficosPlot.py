@@ -15,10 +15,12 @@ def TimesPlot(ano_time_plot, time):
         sns.pointplot(x = "ano", y = "ponto_mandante", 
                     color = "green", 
                     data = time_df, 
+                    markers = "."
                     )
         sns.pointplot(x = "ano", y = "ponto_visitante", 
                     color = "red", 
                     data = time_df,
+                    markers = "."
                     )
         axes.set(xlabel = "Ano", ylabel = "Pontos", title = f"Pontos Ganhos dos principais times da Serie A do Brasileirão nos Últimos 10 Anos ({time})")
         plt.yticks(np.arange(0, max(time_df["ponto_mandante"])+5, 5.0))
